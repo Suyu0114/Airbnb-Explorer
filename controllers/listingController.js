@@ -6,6 +6,7 @@ const Listing = require("../models/Listing");
 
 // GET All (API)
 exports.apiGetAll = async (req, res) => {
+    console.log("API GET All");
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
@@ -89,16 +90,15 @@ exports.apiDelete = async (req, res) => {
 // Show All Listings
 exports.viewAllListings = async (req, res) => {
     try {
-        // Creative Feature: Search by Name (using query param)
         const searchQuery = req.query.search;
         let filter = {};
 
         if (searchQuery) {
-            // Case-insensitive search
-            filter.name = { $regex: searchQuery, $options: 'i' };
+
+            filter.NAME = { $regex: searchQuery, $options: 'i' };
         }
 
-        // top 20
+
         const listings = await Listing.find(filter).limit(20).lean();
 
         res.render("index", {
@@ -106,7 +106,9 @@ exports.viewAllListings = async (req, res) => {
             listings: listings,
             searchQuery: searchQuery
         });
+
     } catch (err) {
+        console.error(err);
         res.render("error", { message: "Error retrieving data" });
     }
 };

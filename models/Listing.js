@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 
 const listingSchema = new mongoose.Schema({
-    // JSON id or _id
-    _id: { type: String },
+
     // title
     NAME: { type: String, required: true },
     price: { type: String },
@@ -10,8 +9,10 @@ const listingSchema = new mongoose.Schema({
     summary: String,
     property_type: String,
     images: [String]
+
 }, {
-    collection: 'listings' // set collection name
+    collection: 'listings', // set collection name
+    strict: false // allow unknown fields
 });
 
 // Export the model
