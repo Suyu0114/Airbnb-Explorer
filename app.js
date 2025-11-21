@@ -11,7 +11,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-const { engine } = require('express-handlebars'); // 使用 Assignment 2 相同的 engine
+const { engine } = require('express-handlebars'); // == Assignment 2 engine
 
 const config = require("./config/database");
 const listingRoutes = require("./routes/index");
@@ -55,3 +55,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+// for vercel!!!!!!!!!
+module.exports = app;
