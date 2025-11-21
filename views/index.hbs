@@ -1,0 +1,34 @@
+<h1>{{title}}</h1>
+
+<div class="search-bar">
+    <form action="/listings" method="GET" style="display: flex; width: 100%; gap: 10px;">
+        <input type="text" name="search" placeholder="Search by Listing Name..." value="{{searchQuery}}">
+        <button type="submit">Search</button>
+
+    </form>
+</div>
+
+{{#each listings}}
+<div class="card">
+
+    <img src="{{#if this.thumbnail}}{{this.thumbnail}}{{else}}https://via.placeholder.com/150{{/if}}"
+        alt="Listing Image" onerror="this.src='https://via.placeholder.com/150';">
+
+    <div>
+        <h3>{{this.NAME}}</h3>
+
+        <p><strong>Price:</strong> {{this.price}}</p>
+
+        <p><strong>Type:</strong> {{this.property_type}} | <strong>ID:</strong> {{this._id}}</p>
+
+        <p>{{this.summary}}</p>
+
+    </div>
+</div>
+
+
+{{else}}
+
+<p>No listings found.</p>
+
+{{/each}}
